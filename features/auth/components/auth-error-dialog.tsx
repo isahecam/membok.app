@@ -2,7 +2,7 @@
 
 import { useQueryState } from "nuqs";
 
-import { getAuthErrorMessage } from "@/features/auth/errors/auth.errors";
+import { getAuthErrorMessage } from "@/features/auth/lib/errors";
 import {
   AlertDialog,
   AlertDialogContent,
