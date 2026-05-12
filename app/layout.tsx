@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 
 import "./globals.css";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
+
+import { Header } from "@/shared/components/layout/header";
+import { GooeyToaster } from "@/shared/components/ui/goey-toaster";
 
 const geistSans = Geist({
   variable: "--font-sans",
@@ -23,7 +27,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className={`${geistSans.variable} h-full antialiased`}>
-      <body className="flex min-h-full flex-col">{children}</body>
+      <body className="flex min-h-full flex-col">
+        <NuqsAdapter>
+          <Header />
+          {children}
+          <GooeyToaster position="top-center" />
+        </NuqsAdapter>
+      </body>
     </html>
   );
 }
