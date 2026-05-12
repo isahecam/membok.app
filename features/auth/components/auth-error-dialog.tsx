@@ -1,8 +1,10 @@
 "use client";
 
 import { useQueryState } from "nuqs";
+import { Suspense } from "react";
 
 import { getAuthErrorMessage } from "@/features/auth/lib/errors";
+import { authSearchParamsParsers } from "@/features/auth/lib/search-params";
 import {
   AlertDialog,
   AlertDialogContent,
@@ -13,10 +15,10 @@ import {
   AlertDialogAction,
 } from "@/shared/components/ui/alert-dialog";
 
-export function AuthErrorDialog() {
-  const [error, setError] = useQueryState("error");
+function AuthErrorDialogInner() {
+  const [error, setError] = useQueryState("error", authSearchParamsParsers.error);
 
-  const message = getAuthErrorMessage(error ?? undefined);
+  const message = getAuthErrorMessage(error);
 
   if (!error || !message) return null;
 
@@ -32,5 +34,13 @@ export function AuthErrorDialog() {
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
+  );
+}
+
+export function AuthErrorDialog() {
+  return (
+    <Suspense fallback={null}>
+      <AuthErrorDialogInner />
+    </Suspense>
   );
 }
