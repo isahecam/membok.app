@@ -2,6 +2,7 @@
 
 import { useQueryState } from "nuqs";
 
+import { getAuthErrorMessage } from "@/features/auth/errors/auth-errors";
 import {
   AlertDialog,
   AlertDialogContent,
@@ -11,7 +12,6 @@ import {
   AlertDialogFooter,
   AlertDialogAction,
 } from "@/shared/components/ui/alert-dialog";
-import { getAuthErrorMessage } from "@/shared/errors/auth-errors";
 
 export function AuthErrorDialog() {
   const [error, setError] = useQueryState("error");
