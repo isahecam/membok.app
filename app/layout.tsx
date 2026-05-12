@@ -4,7 +4,7 @@ import { Geist } from "next/font/google";
 import "./globals.css";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 
-import { Header } from "@/shared/components/layout/header";
+import { Header } from "@/app/_components/header";
 import { GooeyToaster } from "@/shared/components/ui/goey-toaster";
 
 const geistSans = Geist({
