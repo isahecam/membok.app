@@ -1,7 +1,7 @@
+import { GoogleAuthButton } from "@/features/auth/components/google-auth-button";
+import { UserMenuDropdown } from "@/features/profile/components/user-menu-dropdown";
 import { getServerSession } from "@/lib/auth-server";
-import { GoogleAuthButton } from "@/shared/components/auth/google-auth-button";
 import { MembokLogo } from "@/shared/components/layout/membok-logo";
-import { UserMenuDropdown } from "@/shared/components/profile/user-menu-dropdown";
 
 export async function Header() {
   const session = await getServerSession();
