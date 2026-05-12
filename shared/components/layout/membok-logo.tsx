@@ -1,6 +1,6 @@
 import Image, { ImageProps } from "next/image";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/lib/utils";
 
 type MembokLogoProps = Omit<ImageProps, "src" | "alt" | "width" | "height">;
 
