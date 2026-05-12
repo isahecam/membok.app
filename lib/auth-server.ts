@@ -1,7 +1,7 @@
 import { headers } from "next/headers";
 
 import { auth } from "@/lib/auth";
-import { err, ok } from "@/lib/result";
+import { err, ok } from "@/shared/lib/result";
 
 export async function getServerSession() {
   return await auth.api.getSession({
