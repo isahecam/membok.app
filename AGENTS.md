@@ -7,7 +7,7 @@
 ## Code generation
 
 - Always follow the conventions in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
-- Never use default exports
+- Do not use default exports for components; only use default exports for files inside the `app/` directory intended as Next.js pages.
 - Never import between features directly
 - Run `pnpm build` after changes to catch type errors
 
@@ -18,7 +18,7 @@
 
 ## Hard rules
 
-- Never modify files inside `components/ui/` — that is shadcn territory
+- Never modify files inside `shared/components/ui/` — that is shadcn territory
 - Never install a package without asking first
 - Never run `pnpm lint:fix` automatically — ask before auto-fixing
 
