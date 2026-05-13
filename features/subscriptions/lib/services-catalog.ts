@@ -1,4 +1,4 @@
-export const SERVICES = ["spotify", "apple-music"] as const;
+export const SERVICES = ["spotify", "apple-music", "netflix"] as const;
 
 export type Service = (typeof SERVICES)[number];
 
@@ -15,6 +15,10 @@ export const SERVICES_REGISTRY = {
   "apple-music": {
     name: "Apple Music",
     logoUrl: "/services/apple-music.svg",
+  },
+  netflix: {
+    name: "Netflix",
+    logoUrl: "/services/netflix.svg",
   },
 } satisfies Record<Service, ServiceMetadata>;
 
