@@ -36,6 +36,17 @@ class SubscriptionService {
 
     return ok(subscription);
   }
+
+  async getUserSubscriptions(userId: string) {
+    const [error, subscriptions] = await this.subscriptionRepository.findByUserId(userId);
+
+    if (error) {
+      console.error("[Service.getUserSubscriptions] findByUserId:", error);
+      return err({ reason: "INTERNAL_ERROR" });
+    }
+
+    return ok(subscriptions);
+  }
 }
 
 export const subscriptionService = new SubscriptionService(subscriptionRepository);
