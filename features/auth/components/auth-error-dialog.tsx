@@ -3,6 +3,7 @@
 import { useQueryState } from "nuqs";
 import { Suspense } from "react";
 
+import { GoogleAuthButton } from "@/features/auth/components/google-auth-button";
 import { getAuthErrorMessage } from "@/features/auth/lib/errors";
 import { authSearchParamsParsers } from "@/features/auth/lib/search-params";
 import {
@@ -12,7 +13,7 @@ import {
   AlertDialogTitle,
   AlertDialogDescription,
   AlertDialogFooter,
-  AlertDialogAction,
+  AlertDialogCancel,
 } from "@/shared/components/ui/alert-dialog";
 
 function AuthErrorDialogInner() {
@@ -30,7 +31,12 @@ function AuthErrorDialogInner() {
           <AlertDialogDescription>{message.description}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogAction onClick={() => setError(null)}>Cerrar</AlertDialogAction>
+          <AlertDialogCancel variant="outline" onClick={() => setError(null)}>
+            Cerrar
+          </AlertDialogCancel>
+          <GoogleAuthButton variant="default" size="default">
+            Reintentar
+          </GoogleAuthButton>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
