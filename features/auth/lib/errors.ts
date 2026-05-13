@@ -5,8 +5,9 @@ interface AuthErrorMeta {
 
 export const AUTH_ERROR_MESSAGES: Record<string, AuthErrorMeta> = {
   access_denied: {
-    reason: "No se pudo acceder a la cuenta de Google.",
-    description: "Algo salió mal al acceder a la cuenta de Google. Intenta nuevamente.",
+    reason: "No pudimos conectar tu cuenta de Google",
+    description:
+      "Tus datos están seguros, pero hubo un problema al intentar sincronizar la información. Por favor, intenta nuevamente.",
   },
   default: {
     reason: "Ocurrió un error al iniciar sesión.",
