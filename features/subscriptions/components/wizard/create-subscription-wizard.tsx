@@ -1,9 +1,10 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect } from "react";
+import { useEffect, useTransition } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
+import { createSubscriptionAction } from "@/features/subscriptions/actions/create-subscription.action";
 import { SubscriptionForm } from "@/features/subscriptions/components/forms/subscription-form";
 import { WizardStepSelectService } from "@/features/subscriptions/components/wizard/wizard-step-select-service";
 import { SERVICES_REGISTRY } from "@/features/subscriptions/lib/services-catalog";
@@ -25,6 +26,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/shared/components/ui/dialog";
+import { gooeyToast } from "@/shared/components/ui/goey-toaster";
+import { showErrorToast } from "@/shared/lib/show-error-toast";
 
 export function CreateSubscriptionWizard() {
   const isOpen = useWizardIsOpen();
@@ -32,6 +35,7 @@ export function CreateSubscriptionWizard() {
   const selectedService = useWizardSelectedService();
   const step = useWizardStep();
   const { close } = useWizardActions();
+  const [isPending, startTransition] = useTransition();
 
   const methods = useForm<SubscriptionPayload>({
     resolver: zodResolver(SubscriptionSchema),
@@ -61,10 +65,21 @@ export function CreateSubscriptionWizard() {
     }
   }, [selectedService, methods]);
 
-  async function onSubmit(values: SubscriptionPayload) {
-    console.log(values);
+  async function onSubmit(data: SubscriptionPayload) {
+    startTransition(async () => {
+      const [error] = await createSubscriptionAction(data);
 
-    handleClose();
+      if (error) {
+        showErrorToast(error.reason);
+        return;
+      }
+
+      gooeyToast.success("Suscripción registrada correctamente", {
+        showTimestamp: false,
+      });
+
+      handleClose();
+    });
   }
 
   function handleClose() {
@@ -97,8 +112,8 @@ export function CreateSubscriptionWizard() {
                 onClick={methods.handleSubmit(onSubmit, (errors) => {
                   console.log(errors);
                 })}
-                disabled={methods.formState.isSubmitting}>
-                {methods.formState.isSubmitting ? "Registrando..." : "Registrar suscripción"}
+                disabled={isPending}>
+                {isPending ? "Registrando..." : "Registrar suscripción"}
               </Button>
             </>
           )}
