@@ -45,7 +45,7 @@ export function SubscriptionForm() {
         render={({ field, fieldState }) => (
           <Field data-invalid={fieldState.invalid}>
             <FieldContent>
-              <FieldLabel htmlFor={field.name}>Ciclo de facturación</FieldLabel>
+              <FieldLabel htmlFor={field.name}>Periodo de pago</FieldLabel>
               <Select name={field.name} value={field.value} onValueChange={field.onChange}>
                 <SelectTrigger id={field.name} aria-invalid={fieldState.invalid} className="w-full min-w-[120px]">
                   <SelectValue placeholder="Facturación" />
