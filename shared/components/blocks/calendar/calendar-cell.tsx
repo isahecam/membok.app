@@ -12,7 +12,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 
 export function CalendarCell({ day, children, ...props }: Props) {
   return (
-    <div className="relative min-h-24 w-full text-xs text-zinc-500" {...props}>
+    <div className="relative grid min-h-24 w-full place-items-center-safe text-xs text-zinc-500" {...props}>
       <Badge variant={day.isToday ? "default" : "ghost"} className="absolute right-0 bottom-3 size-6 text-xs">
         {day.dayOfMonth}
       </Badge>
