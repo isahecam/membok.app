@@ -5,6 +5,7 @@ import "./globals.css";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 import { Header } from "@/app/_components/header";
+import { CreateSubscriptionWizard } from "@/features/subscriptions/components/wizard/create-subscription-wizard";
 import { GooeyToaster } from "@/shared/components/ui/goey-toaster";
 
 const geistSans = Geist({
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
     default: "Membok",
     template: "%s | Membok",
   },
-  description: "Registra y organiza todas tus suscripciones y servicios en un solo lugar",
+  description: "Registra y organiza todas tus servicios y suscripciones en un solo lugar",
 };
 
 export default function RootLayout({
@@ -32,6 +33,7 @@ export default function RootLayout({
           <Header />
           {children}
           <GooeyToaster position="top-center" />
+          <CreateSubscriptionWizard />
         </NuqsAdapter>
       </body>
     </html>
