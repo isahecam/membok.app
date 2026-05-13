@@ -1,21 +1,21 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { HTMLAttributes } from "react";
+
+import { Badge } from "@/shared/components/ui/badge";
 
 import type { CalendarDay } from "./calendar.types";
 
-interface Props {
+interface Props extends HTMLAttributes<HTMLDivElement> {
   day: CalendarDay;
-  children?: ReactNode;
 }
 
-export function CalendarCell({ day, children }: Props) {
+export function CalendarCell({ day, children, ...props }: Props) {
   return (
-    <div
-      className={`flex min-h-24 flex-col gap-1 bg-white p-2 dark:bg-zinc-950 ${
-        day.isCurrentMonth ? "" : "opacity-40"
-      } ${day.isToday ? "ring-2 ring-blue-500 ring-inset" : ""}`}>
-      <span className="text-xs text-zinc-500">{day.dayOfMonth}</span>
+    <div className="relative min-h-24 w-full text-xs text-zinc-500" {...props}>
+      <Badge variant={day.isToday ? "default" : "ghost"} className="absolute right-0 bottom-3 size-6 text-xs">
+        {day.dayOfMonth}
+      </Badge>
       {children}
     </div>
   );
