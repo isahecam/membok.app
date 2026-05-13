@@ -8,10 +8,10 @@ export function CalendarMonthNavigator() {
   const currentDate = useCurrentDate();
   const { goToPrevMonth, goToNextMonth } = useCalendarActions();
 
-  const label = dt.format(currentDate, "LLLL yyyy");
+  const label = dt.format(currentDate, "LLLL 'de' yyyy");
 
   return (
-    <div className="flex items-center justify-between px-4 py-3">
+    <div className="flex items-center justify-between py-2">
       <Button variant="ghost" size="icon-sm" onClick={goToPrevMonth} aria-label="Previous month">
         <ChevronLeftIcon />
       </Button>
