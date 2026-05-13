@@ -86,18 +86,21 @@ export function CreateSubscriptionWizard() {
         </FormProvider>
 
         <DialogFooter>
-          <Button variant="outline" onClick={handleClose}>
-            Cerrar
-          </Button>
           {step.id === "form" && (
-            <Button
-              type="button"
-              onClick={methods.handleSubmit(onSubmit, (errors) => {
-                console.log(errors);
-              })}
-              disabled={methods.formState.isSubmitting}>
-              {methods.formState.isSubmitting ? "Creando..." : "Crear suscripción"}
-            </Button>
+            <>
+              <Button variant="outline" onClick={handleClose}>
+                Cerrar
+              </Button>
+
+              <Button
+                type="button"
+                onClick={methods.handleSubmit(onSubmit, (errors) => {
+                  console.log(errors);
+                })}
+                disabled={methods.formState.isSubmitting}>
+                {methods.formState.isSubmitting ? "Registrando..." : "Registrar suscripción"}
+              </Button>
+            </>
           )}
         </DialogFooter>
       </DialogContent>
