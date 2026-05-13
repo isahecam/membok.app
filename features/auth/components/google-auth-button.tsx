@@ -1,47 +1,41 @@
 "use client";
 
+import { VariantProps } from "class-variance-authority";
 import { goeyToast } from "goey-toast";
 import { useSearchParams } from "next/navigation";
-import { useTransition } from "react";
+import { ButtonHTMLAttributes } from "react";
 
 import { authClient } from "@/lib/auth-client";
 import { Google } from "@/shared/components/icons/google";
-import { Button } from "@/shared/components/ui/button";
-import { Spinner } from "@/shared/components/ui/spinner";
+import { Button, buttonVariants } from "@/shared/components/ui/button";
 
-export function GoogleAuthButton() {
+type Props = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "onClick"> & VariantProps<typeof buttonVariants>;
+
+export function GoogleAuthButton({ children, variant = "ghost", size = "sm", disabled, ...props }: Props) {
   const params = useSearchParams();
-  const [isPending, startTransition] = useTransition();
 
-  const handleSignIn = () => {
-    startTransition(() => {
-      goeyToast.promise(
-        authClient.signIn.social({
-          provider: "google",
-          callbackURL: "/",
-          errorCallbackURL: "/",
-          fetchOptions: {
-            query: params,
-          },
-        }),
-        {
-          loading: "Redirigiendo...",
-          error: "No pudimos conectar con Google. Intenta de nuevo.",
-          success: "Redirección exitosa",
-          showTimestamp: false,
-        },
-      );
-    });
-  };
+  function handleSignIn() {
+    const query = Object.fromEntries(params.entries());
+
+    goeyToast.promise(
+      authClient.signIn.social({
+        provider: "google",
+        callbackURL: "/",
+        errorCallbackURL: "/",
+        fetchOptions: { query },
+      }),
+      {
+        loading: "Redirigiendo...",
+        error: "No pudimos conectar con Google. Intenta de nuevo.",
+        success: "Redirección exitosa",
+        showTimestamp: false,
+      },
+    );
+  }
 
   return (
-    <Button variant="ghost" size="sm" onClick={handleSignIn} aria-label="Continuar con Google" disabled={isPending}>
-      {isPending ? (
-        <>
-          <Spinner />
-          Redirigiendo...
-        </>
-      ) : (
+    <Button variant={variant} size={size} onClick={handleSignIn} disabled={disabled} {...props}>
+      {children ?? (
         <>
           <Google />
           Continuar con Google
