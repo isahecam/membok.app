@@ -5,7 +5,8 @@ import "./globals.css";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 import { Header } from "@/app/_components/header";
-import { CreateSubscriptionWizard } from "@/features/subscriptions/components/wizard/create-subscription-wizard";
+import { AuthErrorDialog } from "@/features/auth/components/auth-error-dialog";
+import { AuthModal } from "@/features/auth/components/auth-modal";
 import { GooeyToaster } from "@/shared/components/ui/goey-toaster";
 
 const geistSans = Geist({
@@ -33,7 +34,8 @@ export default function RootLayout({
           <Header />
           {children}
           <GooeyToaster position="top-center" />
-          <CreateSubscriptionWizard />
+          <AuthErrorDialog />
+          <AuthModal />
         </NuqsAdapter>
       </body>
     </html>
