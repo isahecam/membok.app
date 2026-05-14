@@ -19,7 +19,7 @@ const initialState = {
   subscription: null,
 };
 
-const useEditSubscriptionStore = create<EditSubscriptionState>((set) => ({
+export const useEditSubscriptionStore = create<EditSubscriptionState>((set) => ({
   ...initialState,
   actions: {
     open: (subscription) => {
