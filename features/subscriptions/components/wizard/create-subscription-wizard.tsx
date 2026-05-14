@@ -27,6 +27,7 @@ import {
   DialogTitle,
 } from "@/shared/components/ui/dialog";
 import { gooeyToast } from "@/shared/components/ui/goey-toaster";
+import { ScrollArea } from "@/shared/components/ui/scroll-area";
 import { showErrorToast } from "@/shared/lib/show-error-toast";
 
 export function CreateSubscriptionWizard() {
@@ -95,10 +96,14 @@ export function CreateSubscriptionWizard() {
           <DialogDescription>{step.description}</DialogDescription>
         </DialogHeader>
 
-        <FormProvider {...methods}>
-          {step.id === "services" && <WizardStepSelectService />}
-          {step.id === "form" && <SubscriptionForm />}
-        </FormProvider>
+        <ScrollArea className="h-[50vh] w-full rounded-md mask-t-from-90% mask-b-from-90%">
+          <div className="py-4">
+            <FormProvider {...methods}>
+              {step.id === "services" && <WizardStepSelectService />}
+              {step.id === "form" && <SubscriptionForm />}
+            </FormProvider>
+          </div>
+        </ScrollArea>
 
         <DialogFooter>
           {step.id === "form" && (
