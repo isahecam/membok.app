@@ -47,6 +47,34 @@ class SubscriptionService {
 
     return ok(subscriptions);
   }
+
+  async deleteSubscription(subscriptionId: string, userId: string) {
+    const [findError, subscription] = await this.subscriptionRepository.findById(subscriptionId);
+
+    if (findError) {
+      if (findError.reason === "NOT_FOUND") {
+        return err({ reason: "SUBSCRIPTION_NOT_FOUND" });
+      }
+      console.error("[Service.deleteSubscription] findById:", findError);
+      return err({ reason: "INTERNAL_ERROR" });
+    }
+
+    if (subscription.userId !== userId) {
+      return err({ reason: "SUBSCRIPTION_NOT_FOUND" });
+    }
+
+    const [deleteError] = await this.subscriptionRepository.delete(subscriptionId);
+
+    if (deleteError) {
+      if (deleteError.reason === "NOT_FOUND") {
+        return err({ reason: "SUBSCRIPTION_NOT_FOUND" });
+      }
+      console.error("[Service.deleteSubscription] delete:", deleteError);
+      return err({ reason: "INTERNAL_ERROR" });
+    }
+
+    return ok(undefined);
+  }
 }
 
 export const subscriptionService = new SubscriptionService(subscriptionRepository);
