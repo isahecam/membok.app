@@ -43,7 +43,7 @@ const initialState = {
   selectedService: null,
 };
 
-const useWizardStore = create<WizardState>((set) => ({
+export const useWizardStore = create<WizardState>((set) => ({
   ...initialState,
   actions: {
     open: (date) => set({ isOpen: true, stepId: "services", selectedDate: date }),
@@ -53,7 +53,7 @@ const useWizardStore = create<WizardState>((set) => ({
   },
 }));
 
-// Selectores atómicos
+// Selectores atómicos (sin cambios)
 export const useWizardIsOpen = () => useWizardStore((s) => s.isOpen);
 export const useWizardStep = () => useWizardStore((s) => getStepById(s.stepId));
 export const useWizardSelectedDate = () => useWizardStore((s) => s.selectedDate);
