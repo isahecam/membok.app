@@ -19,7 +19,7 @@ const initialState = {
   selectedDate: null,
 };
 
-const useDaySubscriptionsStore = create<DaySubscriptionsState>((set, get) => ({
+export const useDaySubscriptionsStore = create<DaySubscriptionsState>((set, get) => ({
   ...initialState,
   actions: {
     open: (date) => set({ isOpen: true, selectedDate: date }),
