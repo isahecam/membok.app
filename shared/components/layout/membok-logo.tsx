@@ -13,7 +13,7 @@ export function MembokLogo({ className, ...props }: MembokLogoProps) {
       width={225}
       height={54}
       priority
-      className={cn("h-6 w-auto select-none", className)}
+      className={cn("h-8 w-auto select-none", className)}
     />
   );
 }
