@@ -3,6 +3,7 @@ import { Geist } from "next/font/google";
 
 import "./globals.css";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
+import { Suspense } from "react";
 
 import { Header } from "@/app/_components/header";
 import { AuthErrorDialog } from "@/features/auth/components/auth-error-dialog";
@@ -35,7 +36,9 @@ export default function RootLayout({
           {children}
           <GooeyToaster position="top-center" />
           <AuthErrorDialog />
-          <AuthModal />
+          <Suspense fallback={null}>
+            <AuthModal />
+          </Suspense>
         </NuqsAdapter>
       </body>
     </html>
