@@ -40,6 +40,17 @@ class DrizzleSubscriptionRepository implements SubscriptionRepository {
       return err({ reason: "DATABASE_ERROR", cause: error });
     }
   }
+
+  async delete(id: string) {
+    try {
+      const [result] = await db.delete(subscriptions).where(eq(subscriptions.id, id)).returning();
+      if (!result) return err({ reason: "NOT_FOUND" });
+      return ok(undefined);
+    } catch (error) {
+      console.error("[Repo.deleteById] caught:", error);
+      return err({ reason: "DATABASE_ERROR", cause: error });
+    }
+  }
 }
 
 export const subscriptionRepository = new DrizzleSubscriptionRepository();
