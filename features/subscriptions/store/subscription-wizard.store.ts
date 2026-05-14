@@ -53,7 +53,7 @@ export const useWizardStore = create<WizardState>((set) => ({
   },
 }));
 
-// Selectores atómicos (sin cambios)
+// Selectores atómicos
 export const useWizardIsOpen = () => useWizardStore((s) => s.isOpen);
 export const useWizardStep = () => useWizardStore((s) => getStepById(s.stepId));
 export const useWizardSelectedDate = () => useWizardStore((s) => s.selectedDate);
