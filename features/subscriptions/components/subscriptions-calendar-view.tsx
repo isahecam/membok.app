@@ -1,5 +1,6 @@
 "use client";
 
+import { useRequireAuth } from "@/features/auth/hooks/use-require-auth";
 import { SERVICES_REGISTRY } from "@/features/subscriptions/lib/services-catalog";
 import { useDaySubscriptionsActions } from "@/features/subscriptions/store/day-subscriptions.store";
 import { useWizardActions } from "@/features/subscriptions/store/subscription-wizard.store";
@@ -17,18 +18,20 @@ import { cn } from "@/shared/lib/utils";
 
 interface Props {
   subscriptions: Subscription[];
+  isAuthenticated: boolean;
 }
 
-export function SubscriptionsCalendarView({ subscriptions }: Props) {
+export function SubscriptionsCalendarView({ subscriptions, isAuthenticated }: Props) {
+  const requireAuth = useRequireAuth(isAuthenticated);
+
   const { open } = useWizardActions();
   const { open: openDaySubscriptions } = useDaySubscriptionsActions();
 
   function handleCellClick(date: string, hasSubscriptions: boolean) {
-    if (hasSubscriptions) {
-      openDaySubscriptions(date);
-    } else {
-      open(date);
-    }
+    requireAuth(() => {
+      if (hasSubscriptions) openDaySubscriptions(date);
+      else open(date);
+    });
   }
 
   return (
