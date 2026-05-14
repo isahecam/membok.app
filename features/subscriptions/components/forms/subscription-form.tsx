@@ -18,7 +18,7 @@ export function SubscriptionForm() {
   const { control } = useFormContext<SubscriptionPayload>();
 
   return (
-    <FieldGroup className="py-6">
+    <FieldGroup>
       <Controller
         name="name"
         control={control}
