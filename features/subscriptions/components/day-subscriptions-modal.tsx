@@ -11,6 +11,7 @@ import {
   useDaySubscriptionsIsOpen,
   useDaySubscriptionsSelectedDate,
 } from "@/features/subscriptions/store/day-subscriptions.store";
+import { useDeleteSubscriptionActions } from "@/features/subscriptions/store/delete-subscription.store";
 import type { Subscription } from "@/features/subscriptions/types/subscription.types";
 import { isSubscriptionDueOn } from "@/features/subscriptions/utils/is-subscription-due-on";
 import { dt } from "@/lib/date";
@@ -41,6 +42,7 @@ export function DaySubscriptionsModal({ subscriptions }: Props) {
   const isOpen = useDaySubscriptionsIsOpen();
   const selectedDate = useDaySubscriptionsSelectedDate();
   const { close, addNew } = useDaySubscriptionsActions();
+  const { open: openDelete } = useDeleteSubscriptionActions();
 
   if (!selectedDate) return null;
 
@@ -82,7 +84,12 @@ export function DaySubscriptionsModal({ subscriptions }: Props) {
                     <Button variant="ghost" size="icon" className="rounded-full">
                       <PencilLineIcon />
                     </Button>
-                    <Button variant="destructive" size="icon" className="rounded-full">
+                    <Button
+                      variant="destructive"
+                      size="icon"
+                      className="rounded-full"
+                      onClick={() => openDelete(sub)}
+                      aria-label={`Eliminar ${service.name}`}>
                       <TrashIcon />
                     </Button>
                   </ItemActions>
