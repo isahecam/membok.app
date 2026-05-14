@@ -45,19 +45,21 @@ export function SubscriptionsCalendarView({ subscriptions }: Props) {
               className={cn("size-full")}
               onClick={() => handleCellClick(day.date, subsForDay.length > 0)}>
               <CalendarCell day={day}>
-                <AvatarGroup>
-                  {subsForDay.map((sub) => {
-                    const service = sub.service ? SERVICES_REGISTRY[sub.service] : null;
-                    if (!service) return null;
+                {subsForDay.length > 0 && (
+                  <AvatarGroup>
+                    {subsForDay.map((sub) => {
+                      const service = sub.service ? SERVICES_REGISTRY[sub.service] : null;
+                      if (!service) return null;
 
-                    return (
-                      <Avatar key={sub.id} className="bg-white">
-                        <AvatarImage src={service.logoUrl} alt={service.name} />
-                        <AvatarFallback>{service.name.charAt(0)}</AvatarFallback>
-                      </Avatar>
-                    );
-                  })}
-                </AvatarGroup>
+                      return (
+                        <Avatar key={sub.id} className="bg-white">
+                          <AvatarImage src={service.logoUrl} alt={service.name} />
+                          <AvatarFallback>{service.name.charAt(0)}</AvatarFallback>
+                        </Avatar>
+                      );
+                    })}
+                  </AvatarGroup>
+                )}
               </CalendarCell>
             </Button>
           );
