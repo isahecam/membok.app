@@ -6,7 +6,7 @@ export function CalendarDaysWeek() {
       {DAYS.map((day) => (
         <div
           key={day}
-          className="rounded-4xl bg-accent px-2 py-1 text-center text-xs font-medium text-muted-foreground">
+          className="rounded-3xl bg-accent px-2 py-1 text-center text-xs font-medium text-muted-foreground">
           {day}
         </div>
       ))}
