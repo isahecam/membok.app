@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
 import { subscriptionService } from "@/features/subscriptions/services/subscription.service";
@@ -24,5 +25,6 @@ export async function deleteSubscriptionAction(subscriptionId: string) {
     return err({ reason: serviceError.reason });
   }
 
+  revalidatePath("/");
   return ok(undefined);
 }
