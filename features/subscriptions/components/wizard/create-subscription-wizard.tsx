@@ -96,7 +96,7 @@ export function CreateSubscriptionWizard() {
           <DialogDescription>{step.description}</DialogDescription>
         </DialogHeader>
 
-        <ScrollArea className="h-[50vh] w-full rounded-md mask-t-from-90% mask-b-from-90%">
+        <ScrollArea className="h-[50vh] w-full rounded-md mask-t-from-95% mask-b-from-95%">
           <div className="py-4">
             <FormProvider {...methods}>
               {step.id === "services" && <WizardStepSelectService />}
