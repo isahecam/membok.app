@@ -1,6 +1,7 @@
 import { LandingCalendarPreview } from "@/features/landing/components/landing-calendar-preview";
 import { DaySubscriptionsModal } from "@/features/subscriptions/components/day-subscriptions-modal";
 import { DeleteSubscriptionDialog } from "@/features/subscriptions/components/delete-subscription-dialog";
+import { MonthlyExpenseSummary } from "@/features/subscriptions/components/monthly-expense-summary";
 import { SubscriptionsCalendarView } from "@/features/subscriptions/components/subscriptions-calendar-view";
 import { CreateSubscriptionWizard } from "@/features/subscriptions/components/wizard/create-subscription-wizard";
 import { subscriptionService } from "@/features/subscriptions/services/subscription.service";
@@ -17,7 +18,10 @@ export default async function Home() {
 
   return (
     <>
-      <SubscriptionsCalendarView subscriptions={subscriptions} isAuthenticated={!!session} />
+      <main className="mx-auto flex w-full max-w-4xl flex-col gap-4 p-4">
+        <MonthlyExpenseSummary subscriptions={subscriptions} />
+        <SubscriptionsCalendarView subscriptions={subscriptions} isAuthenticated={!!session} />
+      </main>
       <CreateSubscriptionWizard />
       <DaySubscriptionsModal subscriptions={subscriptions} />
       <DeleteSubscriptionDialog />
