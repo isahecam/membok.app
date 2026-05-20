@@ -35,7 +35,7 @@ export function SubscriptionsCalendarView({ subscriptions, isAuthenticated }: Pr
   }
 
   return (
-    <div className="mx-auto flex w-full max-w-4xl flex-col gap-1 p-4">
+    <>
       <CalendarMonthNavigator />
       <CalendarDaysWeek />
       <CalendarGrid>
@@ -68,6 +68,6 @@ export function SubscriptionsCalendarView({ subscriptions, isAuthenticated }: Pr
           );
         }}
       </CalendarGrid>
-    </div>
+    </>
   );
 }
