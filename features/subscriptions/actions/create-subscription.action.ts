@@ -1,5 +1,7 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+
 import { SubscriptionSchema } from "@/features/subscriptions/schemas/subscription.schema";
 import { subscriptionService } from "@/features/subscriptions/services/subscription.service";
 import { SubscriptionPayload } from "@/features/subscriptions/types/subscription.types";
@@ -22,5 +24,6 @@ export async function createSubscriptionAction(data: SubscriptionPayload) {
     return err({ reason: serviceError.reason });
   }
 
+  revalidatePath("/");
   return ok(subscription);
 }
