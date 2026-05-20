@@ -6,13 +6,13 @@ import type { DateString } from "@/lib/date";
 export const SUBSCRIPTION_WIZARD_STEPS = [
   {
     id: "services",
-    name: "Servico",
-    description: "Selecciona el servicio a registrar.",
+    name: "Servicios",
+    description: "Selecciona el servicio de tu suscripción.",
   },
   {
     id: "form",
-    name: "Detalles",
-    description: "Registra los datos de tu suscripción.",
+    name: "Datos de la suscripción",
+    description: "Registra los datos de la suscripción.",
   },
 ] as const;
 

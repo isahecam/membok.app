@@ -15,13 +15,13 @@ export function WizardStepSelectService() {
         return (
           <Button
             variant="outline"
-            className="size-full"
+            className="h-24 w-full"
             key={service}
             type="button"
             onClick={() => selectService(service)}>
-            <div className="grid place-items-center gap-2 p-4">
-              <Image src={logoUrl} alt={name} width={32} height={32} />
-              <span className="text-sm font-medium">{name}</span>
+            <div className="grid size-full place-items-center gap-2 py-3">
+              <Image src={logoUrl} alt={name} width={32} height={32} className="size-8 object-contain" />
+              <span className="text-xs font-medium text-balance">{name}</span>
             </div>
           </Button>
         );
