@@ -37,6 +37,12 @@ export interface NativeCounterUpProps {
    * Default: true
    */
   autoStart?: boolean;
+  /**
+   * Locale for number formatting. A fixed locale prevents SSR/client hydration mismatches
+   * caused by the server and browser using different system locales.
+   * Default: "en-US"
+   */
+  locale?: string;
   className?: string;
 }
 
@@ -48,6 +54,7 @@ export function NativeCounterUp({
   decimals = 0,
   label,
   autoStart = true,
+  locale = "en-US",
   className,
 }: NativeCounterUpProps) {
   const shouldReduceMotion = useReducedMotion();
@@ -74,7 +81,7 @@ export function NativeCounterUp({
     return () => controls.stop();
   }, [value, duration, autoStart, shouldReduceMotion, decimals]);
 
-  const formattedValue = displayValue.toLocaleString(undefined, {
+  const formattedValue = displayValue.toLocaleString(locale, {
     minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,
   });
