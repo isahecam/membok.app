@@ -2,7 +2,7 @@
 
 import { HTMLAttributes } from "react";
 
-import { Badge } from "@/shared/components/ui/badge";
+import { cn } from "@/shared/lib/utils";
 
 import type { CalendarDay } from "./calendar.types";
 
@@ -11,11 +11,17 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 }
 
 export function CalendarCell({ day, children, ...props }: Props) {
+  console.log(day.date);
   return (
-    <div className="relative grid min-h-24 w-full place-items-center-safe text-xs text-zinc-500" {...props}>
-      <Badge variant={day.isToday ? "default" : "ghost"} className="absolute right-0 bottom-3 size-6 text-xs">
+    <div className="relative grid min-h-24 w-full place-items-center-safe" {...props}>
+      <time
+        dateTime={day.date}
+        className={cn(
+          "absolute top-3 left-0 max-w-max text-[10px] font-medium text-muted-foreground proportional-nums sm:text-xs",
+          day.isToday && "rounded-full bg-primary p-0.5 text-primary-foreground sm:p-1",
+        )}>
         {day.dayOfMonth}
-      </Badge>
+      </time>
       {children}
     </div>
   );
