@@ -18,7 +18,7 @@ export default async function Home() {
 
   return (
     <>
-      <main className="mx-auto flex w-full max-w-4xl flex-col gap-4 p-4">
+      <main className="mx-auto flex w-full max-w-4xl flex-col gap-8 p-4">
         <MonthlyExpenseSummary subscriptions={subscriptions} />
         <SubscriptionsCalendarView subscriptions={subscriptions} isAuthenticated={!!session} />
       </main>
