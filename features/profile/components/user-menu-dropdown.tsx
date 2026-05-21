@@ -14,6 +14,8 @@ import {
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/shared/components/ui/dropdown-menu";
 import { Spinner } from "@/shared/components/ui/spinner";
@@ -50,22 +52,30 @@ export function UserMenuDropdown({ user }: Props) {
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="h-auto max-w-[min(100%,16rem)] gap-2 rounded-lg px-2 py-1.5">
-          <div className="flex min-w-0 flex-1 items-center gap-2">
-            <Avatar size="lg">
-              <AvatarImage src={user.image ?? undefined} alt="Avatar del usuario" />
-              <AvatarFallback>{getUserInitials(user.name)}</AvatarFallback>
-            </Avatar>
-            <div className="grid min-w-0 flex-1 text-left text-sm leading-tight">
-              <span className="truncate font-medium">{user.name}</span>
-              <span className="truncate text-xs text-muted-foreground">{user.email}</span>
-            </div>
+        <Button
+          variant="ghost"
+          size="icon-lg"
+          className="h-auto w-full rounded-full sm:w-auto sm:gap-2 sm:rounded-3xl sm:px-3 sm:py-1.5">
+          <Avatar>
+            <AvatarImage src={user.image ?? undefined} alt="Avatar del usuario" />
+            <AvatarFallback>{getUserInitials(user.name)}</AvatarFallback>
+          </Avatar>
+          <div className="hidden w-full flex-1 text-left text-sm leading-tight sm:grid">
+            <span className="truncate font-medium">{user.name}</span>
+            <span className="truncate text-xs text-muted-foreground">{user.email}</span>
           </div>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" side="bottom" sideOffset={4}>
+      <DropdownMenuContent align="end" side="bottom" sideOffset={4} className="w-(--radix-dropdown-menu-trigger-width)">
+        <DropdownMenuLabel className="p-0 font-normal sm:hidden">
+          <div className="grid flex-1 px-3 py-2 text-left text-sm leading-tight">
+            <span className="truncate font-medium">{user.name}</span>
+            <span className="truncate text-xs">{user.email}</span>
+          </div>
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator className="sm:hidden" />
         <DropdownMenuGroup>
-          <DropdownMenuItem onClick={handleSignOut} disabled={isPending}>
+          <DropdownMenuItem variant="destructive" onClick={handleSignOut} disabled={isPending}>
             {isPending ? (
               <>
                 <Spinner />
