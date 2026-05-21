@@ -10,14 +10,18 @@ export function MonthlyExpenseSummary({ subscriptions }: Props) {
   const { count, total } = getMonthlyExpenseSummary(subscriptions);
 
   return (
-    <header className="flex items-center justify-between rounded-3xl bg-muted p-4">
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-semibold text-muted-foreground uppercase">Gastos totales del mes</p>
-        <NativeCounterUp value={total} className="text-4xl" prefix="$" decimals={2} />
+    <header className="grid grid-cols-2 items-center justify-between rounded-3xl bg-secondary p-4">
+      <div className="flex flex-col gap-2 text-left">
+        <p className="text-xs font-semibold text-pretty text-muted-foreground uppercase sm:text-sm">
+          Gastos totales del mes
+        </p>
+        <NativeCounterUp value={total} className="text-2xl" prefix="$" decimals={2} />
       </div>
-      <div className="flex flex-col items-end gap-2">
-        <p className="text-sm font-semibold text-muted-foreground uppercase">Suscripciones Activas</p>
-        <NativeCounterUp value={count} className="text-4xl" />
+      <div className="flex flex-col gap-2 text-right">
+        <p className="text-xs font-semibold text-pretty text-muted-foreground uppercase sm:text-sm">
+          Suscripciones <span className="text-green-500">activas</span>
+        </p>
+        <NativeCounterUp value={count} className="text-2xl sm:text-3xl" />
       </div>
     </header>
   );
