@@ -5,7 +5,7 @@ import { nextCookies } from "better-auth/next-js";
 import { db } from "@/db";
 
 export const auth = betterAuth({
-  baseURL: process.env.BETTER_AUTH_URL!,
+  baseURL: process.env.BETTER_AUTH_URL,
   socialProviders: {
     google: {
       prompt: "select_account",
