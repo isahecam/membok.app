@@ -11,7 +11,6 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 }
 
 export function CalendarCell({ day, children, ...props }: Props) {
-  console.log(day.date);
   return (
     <div className="relative grid min-h-24 w-full place-items-center-safe" {...props}>
       <time
